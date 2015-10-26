@@ -1,0 +1,56 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Lifx Controller</title>
+	<script src="jquery-2.1.1.min.js"></script>
+	<script src="aurora.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+	<h1>Hello!</h1>
+
+	<div>
+	       <button id="button-turn-on">Turn On!</button>
+           <button id="button-turn-off">Turn Off!</button>
+	</div>
+	<div>
+		<div class="section">
+    			<div>
+        			<h1 id="light_name"></h1>
+    			</div>
+				<div>
+					Hue
+					<input id="slider_hue" type="range" min="0" max="65535"/>
+				</div>
+				<div>
+					Saturation
+					<input id="slider_saturation" type="range" min="0" max="65535"/>
+				</div>
+				<div>
+					Brightness
+					<input id="slider_brightness" type="range" min="0" max="65535"/>
+				</div>
+				<div>
+					Kelvin
+					<input id="slider_kelvin" type="range"  min="2500" max="9000" step="10"/>
+				</div>
+				<div>
+					Fade duration
+					<input id="slider_duration" type="range"  min="0" max="60" step="1" value="1"/>
+				</div>
+			</div>
+			<div id="response">
+			</div>
+		</div>
+	</div>
+
+
+
+	<script src="lifx_picker.js"></script>
+</body>
+</html>

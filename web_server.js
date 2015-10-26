@@ -1,5 +1,11 @@
+var aurora = require('./aurora.js');
+var lifx = require('lifx');
 var express = require('express');
 var app = express();
+
+
+var lx = lifx.init();
+var au = new aurora(lx);
 
 app.use(express.static('public'));
 
@@ -9,11 +15,13 @@ app.get('/', function (req, res) {
 
 app.get('/lights/all/on', function (req, res) {
 	console.log('/lights/all/on');
+	au.turnOn();
 	res.send('');
 });
 
 app.get('/lights/all/off', function (req, res) {
 	console.log('/lights/all/off');
+	au.turnOff();
 	res.send('');
 });
 
