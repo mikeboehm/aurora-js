@@ -37,30 +37,22 @@ var night = {
 
 
 function Aurora(lightsAdapter) {
-	console.log('============ CONSTRUCTOR =======================');
-	console.log(lightsAdapter);
-	console.log('============ /CONSTRUCTOR =======================');
-
-    this.lightsAdapter = lightsAdapter;
+    this.lx = lightsAdapter;
 }
 
-Aurora.prototype.fadeOn = function() {
-	console.log('============  fadeOn: function ============');
-	console.log(this.lightsAdapter);
-	this.lightsAdapter.lightsColour(0, 65535, 32767, 3500, 2000);
+Aurora.prototype.fade = function() {
+	console.log('============  fade ============');
+	this.lx.fade();
 }
 
 Aurora.prototype.turnOn = function() {
 	console.log('============  turnOn: function ============');
-    this.lightsAdapter.lightsOn();
-	this.getBulbStatus();
+    this.lx.lightsOn();
 }
 
 Aurora.prototype.turnOff = function() {
 	console.log('============  turnOff: function ============');
-	console.log(this.lightsAdapter);
-    this.lightsAdapter.lightsOff();
-	this.getBulbStatus();
+    this.lx.lightsOff();
 }
 
 module.exports = Aurora;
