@@ -37,8 +37,6 @@ var night = {
 
 
 function Aurora(lx) {
-
-	// var lx = lifx.init();
 	console.log('============ CONSTRUCTOR =======================');
 	console.log(lx);
 	console.log('============ /CONSTRUCTOR =======================');
@@ -47,39 +45,33 @@ function Aurora(lx) {
 }
 
 Aurora.prototype.fadeOn = function() {
-		console.log('============  fadeOn: function ============');
-		console.log(this.lifx);
-		this.lifx.lightsColour(0, 65535, 32767, 3500, 2000);
-	}
+	console.log('============  fadeOn: function ============');
+	console.log(this.lifx);
+	this.lifx.lightsColour(0, 65535, 32767, 3500, 2000);
+}
 
 Aurora.prototype.turnOn = function() {
-		console.log('============  turnOn: function ============');
-	    this.lifx.lightsOn();
-		this.getBulbStatus();
+	console.log('============  turnOn: function ============');
+    this.lifx.lightsOn();
+	this.getBulbStatus();
 }
 
 Aurora.prototype.turnOff = function() {
-		console.log('============  turnOff: function ============');
-		console.log(this.lifx);
-	    this.lifx.lightsOff();
-		this.getBulbStatus();
+	console.log('============  turnOff: function ============');
+	console.log(this.lifx);
+    this.lifx.lightsOff();
+	this.getBulbStatus();
 }
 
 Aurora.prototype.shutdown = function() {
-		console.log('Shutting down');
-		this.lifx.lightsOff();
-		this.lifx.close();
+	console.log('Shutting down');
+	this.lifx.lightsOff();
+	this.lifx.close();
 }
 
 Aurora.prototype.getBulbStatus = function() {
-		console.log('**************** BULB STATUS *****************')
-		console.log(this.lifx.requestStatus());
+	console.log('**************** BULB STATUS *****************')
+	console.log(this.lifx.requestStatus());
 }
-
-
-
-
-
-// var aurora = new Aurora(lx);
 
 module.exports = Aurora;
