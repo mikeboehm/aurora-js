@@ -1,11 +1,13 @@
 var aurora = require('./aurora.js');
+var lifxAdapter = require('./lifx_adapter.js');
 var lifx = require('lifx');
 var express = require('express');
+
+
 var app = express();
-
-
 var lx = lifx.init();
-var au = new aurora(lx);
+var lightsAdapter = new lifxAdapter(lx);
+var au = new aurora(lightsAdapter);
 
 app.use(express.static('public'));
 
