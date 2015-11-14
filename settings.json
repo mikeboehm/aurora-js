@@ -1,0 +1,42 @@
+{
+    "days": {
+        "0": {
+            "alarm": "10:00"
+        },
+        "1": {
+            "alarm": "07:00"
+        },
+        "2": {
+            "alarm": "07:00"
+        },
+        "3": {
+            "alarm": "07:00"
+        },
+        "4": {
+            "alarm": "07:00"
+        },
+        "5": {
+            "alarm": "07:00"
+        },
+        "6": {
+            "alarm": "10:00"
+        }
+    },
+    "preferences": {
+        "sunrise_duration": "00:30",
+        "sunrise_autoshutoff": "00:60",
+        "sleep_duration": "08:00",
+        "location": {
+            "latitude": {
+                "degrees": 51,
+                "minutes": 30,
+                "seconds": 26
+            },
+            "longitude": {
+                "degrees": 0,
+                "minutes": 7,
+                "seconds": 39
+            }
+        }
+    }
+}
