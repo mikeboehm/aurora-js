@@ -35,14 +35,71 @@ var night = {
  *
  */
 
+ // var night = {
+ //  hue: 0,
+ //  saturation: 65535,
+ //  brightness: 0,
+ //  kelvin: 2500
+ // }
+ //
+ // var dawn = {
+ //  hue: 0,
+ //  saturation: 65535,
+ //  brightness: 65535,
+ //  kelvin: 2500
+ // }
+ //
+ // var sunrise = {
+ // hue: 0,
+ // saturation: 0,
+ // brightness: 65535,
+ // kelvin: 2500
+ // }
+ //
+ // var day = {
+ // hue: 0,
+ // saturation: 65535,
+ // brightness: 0,
+ // kelvin: 2500
+ // }
 
-function Aurora(lightsAdapter) {
+/*
+ * Controls lights based on results from lighting patterns
+ *
+ * Uses Flux and Aurora to control behaviour of lights
+ * Maintains state of Lights
+ * Maintains callback timers
+ *
+ * Toggles lighs based on user input (button being pressed)
+ * Sets lights for the appropriate mode
+ * Lights have different colors depending on whether they're on or off (brightness changes, hue and others are the same
+ * Gets and applies the appropriate end fade
+ * Compares current state with desired state to provide a diff
+ */
+function Aurora(lightsAdapter, alarm) {
+    var that = this;
+
     this.lx = lightsAdapter;
+    this.activeMode = alarm;
+
+    this.activeMode.on('fade', function(fade){
+            console.log('doing fade');
+            that.fader(fade, fade.duration);
+        });
+
+    // this.lightsStatus = false;
+
+    // this.modeAdapters.passive = 'flux';
+    // this.modeAdapters.active = 'alarm';
 }
 
-Aurora.prototype.fade = function() {
+Aurora.prototype.fader = function(color, duration) {
 	console.log('============  fade ============');
-	this.lx.fade();
+
+	var fade = color;
+	fade['duration'] = duration;
+
+	this.lx.fade(fade);
 }
 
 Aurora.prototype.turnOn = function() {
