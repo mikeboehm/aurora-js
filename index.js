@@ -5,8 +5,6 @@ var Aurora = require('./aurora.js');
 var LightsAdapter = require('./node_lifx_adapter.js');
 var LifxClient = require('node-lifx').Client;
 
-
-
 var client = new LifxClient();
 client.init();
 
