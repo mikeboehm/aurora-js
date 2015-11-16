@@ -1,8 +1,4 @@
-var Sunrise = require('sunrise-node');
-var SunriseAdapter = require('./sunrise-adapter.js');
-// var Aurora = require('./aurora.js');
 var Settings = require('./settings.js');
-var Flux = require('./flux.js');
 var Alarm = require('./alarm_mode.js');
 var Aurora = require('./aurora.js');
 
