@@ -5,7 +5,8 @@
   "repository": "https://github.com/mikeboehm/aurora-js",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/jasmine-node spec/"
+    "test": "./node_modules/.bin/jasmine-node spec/",
+    "start": "node index.js"
   },
   "author": "Mike Boehm @laserboehm",
   "license": "MIT",
