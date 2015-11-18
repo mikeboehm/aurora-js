@@ -87,6 +87,8 @@ function Aurora(lightsAdapter, alarm) {
             that.fader(fade, fade.duration);
         });
 
+    alarm.setAlarm();
+
     // this.lightsStatus = false;
 
     // this.modeAdapters.passive = 'flux';

@@ -5,29 +5,24 @@ var EventEmitter = require('events').EventEmitter;
 
 function AlarmMode() {
 	var that = this;
-	var durationSeconds = 60;
+	this.durationSeconds = 60;
 	// Halve and convert to milliseconds
-	var duration = durationSeconds / 2;
-	this.durationMs = duration * 1000;
+	this.duration = this.durationSeconds / 2;
+	this.durationMs = this.duration * 1000;
+	this.dayDurationSeconds = 60 * 60;
+	this.dayDurationMs = this.dayDurationSeconds * 1000;
+}
 
-	console.log('durationMs: ' + this.durationMs);
+util.inherits(AlarmMode, EventEmitter);
+
+AlarmMode.prototype.setAlarm = function(){
+	var that = this;
 	var now = new Moment();
-	var dayDurationSeconds = 60 * 60;
-	this.dayDurationMs = dayDurationSeconds * 1000;
-	// var alarmTime = new Moment('2015-11-15T07:00:00+00:00');
-	var alarmTime = new Moment().add(duration + 60, 'seconds');
-	var predawnTime = alarmTime.clone().subtract(durationSeconds + 10, 'seconds');
-	var dawnTime = alarmTime.clone().subtract(durationSeconds, 'seconds');
-	var sunriseTime = alarmTime.clone().subtract(durationSeconds / 2, 'seconds');
+	var alarmTime = new Moment().add(this.duration + 60, 'seconds');
+	var predawnTime = alarmTime.clone().subtract(this.durationSeconds + 10, 'seconds');
+	var dawnTime = alarmTime.clone().subtract(this.durationSeconds, 'seconds');
+	var sunriseTime = alarmTime.clone().subtract(this.durationSeconds / 2, 'seconds');
 
-
-	/**
-	*	Alarm		07:00
-	*	Duration	30:00
-	*	Sunrise		06:45
-	*	Dawn		06:30
-	*	predawn		06:29
-	*/
 	console.log('now:         '.blue + now.format().blue);
 	console.log('predawnTime: '.blue + predawnTime.format().blue);
 	console.log('dawnTime:    '.blue + dawnTime.format().blue);
@@ -57,8 +52,6 @@ function AlarmMode() {
 		}, alarmTime.format('x') - now.format('x'));
 }
 
-util.inherits(AlarmMode, EventEmitter);
-
 AlarmMode.prototype.predawn = function() {
 	console.log('predawn: '.blue + new Date());
     var fade = {
@@ -66,7 +59,7 @@ AlarmMode.prototype.predawn = function() {
         saturation: 100,
         brightness: 0,
         kelvin: 2500,
-        duration: 0
+        duration: 1000
     }
 
     return fade;

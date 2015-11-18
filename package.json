@@ -14,7 +14,6 @@
     "colors": "^1.1.2",
     "express": "^4.13.3",
     "jasmine-node": "^1.14.5",
-    "lifx": "^0.3.1",
     "moment": "^2.10.6",
     "node-lifx": "^0.3.0",
     "onoff": "^1.0.2",
