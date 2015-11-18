@@ -3,9 +3,12 @@ var Moment = require('moment');
 var EventEmitter = require('events').EventEmitter;
 
 
-function AlarmMode() {
+function AlarmMode(settings) {
 	var that = this;
-	this.durationSeconds = 60;
+
+	this.settings = settings;
+
+	this.durationSeconds = 1200; // 1200 == 20 mins
 	// Halve and convert to milliseconds
 	this.duration = this.durationSeconds / 2;
 	this.durationMs = this.duration * 1000;
@@ -18,17 +21,17 @@ util.inherits(AlarmMode, EventEmitter);
 AlarmMode.prototype.setAlarm = function(){
 	var that = this;
 	var now = new Moment();
-	var alarmTime = new Moment().add(this.duration + 60, 'seconds');
-	var predawnTime = alarmTime.clone().subtract(this.durationSeconds + 10, 'seconds');
-	var dawnTime = alarmTime.clone().subtract(this.durationSeconds, 'seconds');
-	var sunriseTime = alarmTime.clone().subtract(this.durationSeconds / 2, 'seconds');
+	// var nextAlarm = new Moment().add(this.duration + 60, 'seconds');
+	var nextAlarm = this.getNextAlarm();
+	var predawnTime = nextAlarm.clone().subtract(this.durationSeconds + 10, 'seconds');
+	var dawnTime = nextAlarm.clone().subtract(this.durationSeconds, 'seconds');
+	var sunriseTime = nextAlarm.clone().subtract(this.durationSeconds / 2, 'seconds');
 
 	console.log('now:         '.blue + now.format().blue);
 	console.log('predawnTime: '.blue + predawnTime.format().blue);
 	console.log('dawnTime:    '.blue + dawnTime.format().blue);
 	console.log('sunriseTime: '.blue + sunriseTime.format().blue);
-	console.log('alarmTime:   '.blue + alarmTime.format().blue);
-
+	console.log('alarmTime:   '.blue + nextAlarm.format().blue);
 
 	// Predawn countdown
 	that.predawnTimer = setTimeout(function() {
@@ -49,8 +52,38 @@ AlarmMode.prototype.setAlarm = function(){
 	// Day
 	that.dayTimer = setTimeout(function() {
 			that.emit('fade', that.day());
-		}, alarmTime.format('x') - now.format('x'));
+		}, nextAlarm.format('x') - now.format('x'));
 }
+
+AlarmMode.prototype.getNextAlarm = function() {
+	var now = new Moment();
+	var alarm = new Moment();
+
+	var todayAlarm = this.settings.getAlarmForDay(now.day());
+	alarm = this._setAlarmOnMoment(alarm, todayAlarm);
+
+	if (now > alarm) {
+		alarm.add(1, 'days');
+		var tomorrowAlarm = this.settings.getAlarmForDay(alarm.day());
+
+		return this._setAlarmOnMoment(alarm, tomorrowAlarm);
+	} else {
+		return alarm;
+	}
+}
+
+AlarmMode.prototype._setAlarmOnMoment = function(moment, alarmString) {
+	var timeArray = alarmString.split(":");
+
+	// Set alarm details
+	moment
+		.hour(timeArray[0])
+		.minute(timeArray[1])
+		.seconds(0);
+
+	return moment;
+}
+
 
 AlarmMode.prototype.predawn = function() {
 	console.log('predawn: '.blue + new Date());

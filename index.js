@@ -9,7 +9,8 @@ var client = new LifxClient();
 client.init();
 
 var lightsAdapter = new LightsAdapter(client);
-var alarm = new Alarm();
+var settings = new Settings();
+var alarm = new Alarm(settings);
 var aurora = new Aurora(lightsAdapter, alarm);
 
 // GPIO Test

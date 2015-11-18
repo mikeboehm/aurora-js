@@ -13,6 +13,10 @@ Settings.prototype.getSettings = function() {
 	return this.settings;
 }
 
+Settings.prototype.getAlarmForDay = function(dayNumber) {
+	return this.settings.days[dayNumber].alarm;
+}
+
 Settings.prototype.location = function() {
 	return this.settings.preferences.location;
 }
