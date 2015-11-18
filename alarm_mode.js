@@ -3,12 +3,9 @@ var Moment = require('moment');
 var EventEmitter = require('events').EventEmitter;
 
 
-function AlarmMode(settings) {
+function AlarmMode() {
 	var that = this;
-
-	this.settings = settings;
-
-	this.durationSeconds = 1200; // 1200 == 20 mins
+	this.durationSeconds = 60;
 	// Halve and convert to milliseconds
 	this.duration = this.durationSeconds / 2;
 	this.durationMs = this.duration * 1000;
@@ -21,17 +18,17 @@ util.inherits(AlarmMode, EventEmitter);
 AlarmMode.prototype.setAlarm = function(){
 	var that = this;
 	var now = new Moment();
-	// var nextAlarm = new Moment().add(this.duration + 60, 'seconds');
-	var nextAlarm = this.getNextAlarm();
-	var predawnTime = nextAlarm.clone().subtract(this.durationSeconds + 10, 'seconds');
-	var dawnTime = nextAlarm.clone().subtract(this.durationSeconds, 'seconds');
-	var sunriseTime = nextAlarm.clone().subtract(this.durationSeconds / 2, 'seconds');
+	var alarmTime = new Moment().add(this.duration + 60, 'seconds');
+	var predawnTime = alarmTime.clone().subtract(this.durationSeconds + 10, 'seconds');
+	var dawnTime = alarmTime.clone().subtract(this.durationSeconds, 'seconds');
+	var sunriseTime = alarmTime.clone().subtract(this.durationSeconds / 2, 'seconds');
 
 	console.log('now:         '.blue + now.format().blue);
 	console.log('predawnTime: '.blue + predawnTime.format().blue);
 	console.log('dawnTime:    '.blue + dawnTime.format().blue);
 	console.log('sunriseTime: '.blue + sunriseTime.format().blue);
-	console.log('alarmTime:   '.blue + nextAlarm.format().blue);
+	console.log('alarmTime:   '.blue + alarmTime.format().blue);
+
 
 	// Predawn countdown
 	that.predawnTimer = setTimeout(function() {
