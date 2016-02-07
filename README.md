@@ -44,7 +44,17 @@
 
 ### Alarm
 * Alarm has a light of lightIds that it cares about
-* This is surfaced to the user as a Group
+* Alarm generates fades based on the start and end colors, the duration and how far through it we are
+* For the sake of clarity, this is surfaced to the user as a Group
+* nextEvent()
+* handle('prefade')
+
+- Knows about the stages
+- Emits event to tell controller to ask for fades
+- Has a method to provide fades for supplied lights
+
+
+
 
 ### Sunrise
 *A sequence of fades. Can include a prefade?*
@@ -52,6 +62,11 @@
 * Dawn: Black to red
 * Sunrise: Red to white
 * Day: Turn off after a while
+
+prefade: black
+dawn: red
+sunrise: white
+day: sunrise
 
 
 ### Time for sunrise
@@ -65,4 +80,4 @@ One option for catchup fades is to have an additional callback timer. In the cas
 * Controller provides Alarm with lightId
 * Alarm checks time and for a matching Id and generates a custom fade to cause it to match current state of siblings
 * Also provides subsequent fade to provide velocity to match its siblings
-* Basically, if a light appears during a sunrise, it needs to go from whatever colour state it was last in, and then change rapidly to match the current colour of its siblings. Since the siblings are in a state of flux, that globe needs to be set on that course too.
+* Basically, if a light appears during a sunrise, it needs to go from whatever color state it was last in, and then change rapidly to match the current color of its siblings. Since the siblings are in a state of flux, that globe needs to be set on that course too.
