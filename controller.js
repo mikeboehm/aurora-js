@@ -1,5 +1,6 @@
-function Controller(globeManager) {
+function Controller(globeManager, settingsManager) {
 	this.globeManager = globeManager;
+	this.settingsManager = settingsManager;
 }
 
 Controller.prototype.init = function() {

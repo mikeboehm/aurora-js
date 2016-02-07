@@ -1,6 +1,7 @@
 var LifxClient = require('node-lifx').Client;
 var LifxAdapter = require('./lifx_adapter');
 var GlobeManager = require('./globe_manager');
+var SettingsManager = require('./settings');
 var Contoller = require('./controller');
 
 
@@ -10,7 +11,8 @@ client.init();
 var lifxAdapter = new LifxAdapter(client);
 
 var globeManager = new GlobeManager(lifxAdapter);
-var controller = new Contoller(globeManager);
+var settingsManager = new SettingsManager();
+var controller = new Contoller(globeManager, settingsManager);
 controller.init();
 
 var delayedOff = function (controller) {
