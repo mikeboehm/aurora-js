@@ -25,7 +25,7 @@
         },
         "settings": {
             "sunrise_duration": "00:30",
-            "sunrise_autoshutoff": "00:60",
+            "sunrise_autoshutoff": "00:60"
         }
     },
     "preferences": {
