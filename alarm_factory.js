@@ -27,7 +27,7 @@ AlarmFactory.prototype.getNextAlarm = function () {
 
 // Emit a fade trigger event
 AlarmFactory.prototype.triggerFade = function (eventName, duration) {
-	this.emit(eventName, duration);
+	this.emit('fade', {name: eventName, duration: duration});
 };
 
 // Time till moment event in milliseconds

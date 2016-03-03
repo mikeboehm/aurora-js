@@ -105,14 +105,16 @@ describe("Event emitting", function(){
 	var alarmFactory = new AlarmFactory(lights);
 	it("should emit events", function() {
 		var flag = false;
-		alarmFactory.on('test_event', function(duration){
+		alarmFactory.on('fade', function(details){
 			flag = true;
+			expect(details.name).toBe('stage-name');
+			expect(details.duration).toBe(1000);
 		});
 
 		waitsFor(function() {
 			return flag;
 	    }, "The event should be emitted", 750);
 
-		alarmFactory.triggerFade('test_event', 1000);
+		alarmFactory.triggerFade('stage-name', 1000);
 	});
 });
