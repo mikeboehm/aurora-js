@@ -5,7 +5,8 @@ function Fade () {
 	this.kelvin = 2500;
 	this.duration = 0;
 	this.startTime = null;
-	this.lights = [];
+	// this.lights = [];
+	this.lightGroups = [];
 }
 
 Fade.prototype.setDuration = function(duration) {
@@ -48,7 +49,7 @@ Fade.prototype.setSaturation = function(saturation) {
 	this.saturation = saturation;
 }
 
-Fade.prototype.setBrightness(brightness) {
+Fade.prototype.setBrightness = function(brightness) {
 	if(brightness < 0) {
 		brightness = 0;
 	} else if (brightness > 100) {
@@ -57,7 +58,7 @@ Fade.prototype.setBrightness(brightness) {
 	this.brightness = brightness;
 }
 
-Fade.prototype.setKelvin(kelvin) {
+Fade.prototype.setKelvin = function(kelvin) {
 	if(kelvin < 2500) {
 		kelvin = 2500;
 	} else if (kelvin > 9000) {
@@ -92,13 +93,23 @@ Fade.prototype.setStartTime = function(startTime) {
 	return this;
 }
 
-Fade.prototype.setLights = function(lights) {
-	this.lights = lights;
+// Fade.prototype.setLights = function(lights) {
+// 	this.lights = lights;
+// }
+//
+// Fade.prototype.getLights = function() {
+// 	return this.lights;
+// }
+
+Fade.prototype.setLightGroups = function(lightGroups) {
+	this.lightGroups = lightGroups;
 }
 
-Fade.prototype.getLights = function() {
-	return this.lights;
+Fade.prototype.getLightGroups = function() {
+	return this.lightGroups;
 }
+
+
 
 
 // var myfade = new Fade();

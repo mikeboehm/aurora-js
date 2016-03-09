@@ -1,0 +1,42 @@
+{
+	"predawn": {
+		"description": "black",
+		"color": {
+			"hue": 0,
+			"saturation": 100,
+			"brightness": 0,
+			"kelvin": 2500
+		},
+		"lightGroups": ["Bedroom"]
+	},
+	"dawn": {
+		"description": "full red",
+		"color": {
+			"hue": 0,
+			"saturation": 100,
+			"brightness": 100,
+			"kelvin": 2500
+		},
+		"lightGroups": ["Bedroom"]
+	},
+	"sunrise": {
+		"description": "Full daylight",
+		"color": {
+			"hue": 0,
+			"saturation": 0,
+			"brightness": 100,
+			"kelvin": 9000
+		},
+		"lightGroups": ["Bedroom"]
+	},
+	"shutoff": {
+		"description": "fade off",
+		"color": {
+			"hue": 0,
+			"saturation": 0,
+			"brightness": 0,
+			"kelvin": 2500
+		},
+		"lightGroups": ["Bedroom"]
+	}
+}
