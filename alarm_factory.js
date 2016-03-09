@@ -16,7 +16,7 @@ function AlarmFactory (lights) {
 util.inherits(AlarmFactory, EventEmitter);
 
 AlarmFactory.prototype.init = function() {
-	this.alarm = this.getNextAlarm();
+	this.alarm = this.getNextAlarm();	
 }
 
 
