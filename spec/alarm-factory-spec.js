@@ -2,10 +2,10 @@ var AlarmFactory = require('../alarm_factory.js');
 
 var moment = require('moment');
 
-var lights = {'12345': {}};
+// var lights = {'12345': {}};
 
 describe("AlarmFactory object", function () {
-	var alarmFactory = new AlarmFactory(lights);
+	var alarmFactory = new AlarmFactory();
 
     it("should be defined", function () {
         expect(AlarmFactory).toBeDefined();
@@ -13,7 +13,7 @@ describe("AlarmFactory object", function () {
 });
 
 describe("Alarm time for day number", function() {
-	var alarmFactory = new AlarmFactory(lights);
+	var alarmFactory = new AlarmFactory();
 	it("should return 9:00 for Weekends", function (){
 
 		var saturdayAlarmTime = alarmFactory.getAlarmTimeForDayNumber(0);
@@ -36,7 +36,7 @@ describe("Alarm time for day number", function() {
 });
 
 describe("Next alarm", function() {
-	var alarmFactory = new AlarmFactory(lights);
+	var alarmFactory = new AlarmFactory();
 	it("should be in the future", function() {
 		var nextAlarmTime = alarmFactory.getNextAlarmTime();
 		var now = moment();
@@ -45,21 +45,8 @@ describe("Next alarm", function() {
 	});
 });
 
-
-describe("New alarm", function() {
-	var alarmFactory = new AlarmFactory(lights);
-	it("should have lights set", function(){
-
-		var now = moment();
-
-		var alarm = alarmFactory.newAlarm(now);
-
-		expect(alarm.lights).toBe(alarmFactory.lights);
-	});
-});
-
 describe("msToMoment", function() {
-	var alarmFactory = new AlarmFactory(lights);
+	var alarmFactory = new AlarmFactory();
 	it("should return time to Moment Object in milliseconds", function(){
 		var now = moment();
 		now.add(1, 'seconds');
@@ -75,7 +62,7 @@ describe("msToMoment", function() {
 });
 
 describe("msToMoment", function() {
-	var alarmFactory = new AlarmFactory(lights);
+	var alarmFactory = new AlarmFactory();
 	it("should return time to Moment Object in milliseconds", function(){
 		var now = moment();
 		now.add(1, 'seconds');
@@ -91,7 +78,7 @@ describe("msToMoment", function() {
 });
 
 describe("getNextTimer", function(){
-	var alarmFactory = new AlarmFactory(lights);
+	var alarmFactory = new AlarmFactory();
 	it("should stuff", function(){
 		var now = moment();
 		var alarm = alarmFactory.newAlarm(now);
@@ -102,7 +89,7 @@ describe("getNextTimer", function(){
 });
 
 describe("Event emitting", function(){
-	var alarmFactory = new AlarmFactory(lights);
+	var alarmFactory = new AlarmFactory();
 	it("should emit events", function() {
 		var flag = false;
 		alarmFactory.on('fade', function(details){

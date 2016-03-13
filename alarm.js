@@ -29,18 +29,7 @@ function Alarm (alarmTime) {
 		'sunrise': {name: 'sunrise', time: sunrise, duration: 900000}, // 15 mins
 		'shutoff': {name: 'shutoff', time: shutoff, duration: 10000} // 10 secs
 	};
-
-	this.lights = {};
 }
-
-Alarm.prototype.init = function () {
-	this.setLights({'pants':'trosers'});
-	console.log(this.lights);
-}
-
-Alarm.prototype.setLights = function (lights) {
-	this.lights = lights;
-};
 
 Alarm.prototype.getNextEvent = function (time) {
 	var previous = null;

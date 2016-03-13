@@ -54,15 +54,3 @@ describe("get next event", function() {
 		}
 	});
 });
-
-describe("Set alarm", function() {
-	var alarmTime = moment('2016-02-20 07:00:00');
-	var alarm = new Alarm(alarmTime);
-
-	it("shoud set the supplied argument", function(){
-		var lights = {'pants': 'trousers'};
-		alarm.setLights(lights);
-
-		expect(alarm.lights).toBe(lights);
-	});
-});

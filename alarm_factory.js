@@ -6,8 +6,8 @@ var moment = require('moment');
 
 
 
-function AlarmFactory (lights) {
-	this.lights = lights;
+function AlarmFactory () {
+	// this.lights = lights;
 	this.alarm = {};
 	this.timer = setTimeout(function(){}, 0);
 	EventEmitter.call(this);
@@ -16,7 +16,7 @@ function AlarmFactory (lights) {
 util.inherits(AlarmFactory, EventEmitter);
 
 AlarmFactory.prototype.init = function() {
-	this.alarm = this.getNextAlarm();	
+	this.alarm = this.getNextAlarm();
 }
 
 
@@ -63,9 +63,6 @@ AlarmFactory.prototype.getNextTimer = function () {
 // Factory method for Alarm
 AlarmFactory.prototype.newAlarm = function(alarmTime) {
 	var alarm = new Alarm(alarmTime);
-
-	// TODO Alarm shouldn't know about lights
-	alarm.setLights(this.lights);
 
 	return alarm;
 }
