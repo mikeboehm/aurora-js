@@ -115,7 +115,7 @@ Knows what time sunrise and sunset are.*
 
 
 # Globe
-*Represents that current state of an individual globe*
+*Represents that current state of an individual bulb*
 
 ## properties
 	id
@@ -126,6 +126,6 @@ Knows what time sunrise and sunset are.*
 	kelvin
 
 # Fade
-*Instruction to change globe(s)*
+*Instruction to change bulb(s)*
 What would happen if a fade method started a timer with the same duration as the fade?
 This would be handy for sunrise

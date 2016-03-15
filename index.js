@@ -1,6 +1,6 @@
 var LifxClient = require('node-lifx').Client;
 var LifxAdapter = require('./lifx_adapter');
-var GlobeManager = require('./globe_manager');
+var GlobeManager = require('./bulb_manager');
 var SettingsManager = require('./settings');
 var Contoller = require('./controller');
 var AlarmFactory = require('./alarm_factory');
@@ -11,11 +11,11 @@ client.init();
 
 var lifxAdapter = new LifxAdapter(client);
 var fadeFactory = new FadeFactory();
-var globeManager = new GlobeManager(fadeFactory, lifxAdapter);
+var bulbManager = new GlobeManager(fadeFactory, lifxAdapter);
 
 var settingsManager = new SettingsManager();
 var alarmFactory = new AlarmFactory();
-var controller = new Contoller(globeManager, settingsManager, alarmFactory);
+var controller = new Contoller(bulbManager, settingsManager, alarmFactory);
 controller.init();
 
 // GPIO Test

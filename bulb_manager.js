@@ -1,12 +1,10 @@
-var LifxGlobe = require('./lifx_globe.js');
 var FadeFactory = require('./fade_factory');
-var colors = require('colors');
 
-function GlobeManager (fadeFactory, lifxAdapter) {
-	this.globes = {}
+function BulbManager (fadeFactory, lifxAdapter) {
+	this.bulbs = {}
 	this.fadeFactory = fadeFactory;
 	this.lifxAdapter = lifxAdapter;
-	this.hardCodedGlobes = {
+	this.hardCodedBulbs = {
 		"groups": {
 			"Bedroom": [
 				"d073d501bd50",	    // bedside
@@ -20,7 +18,7 @@ function GlobeManager (fadeFactory, lifxAdapter) {
 	};
 }
 
-GlobeManager.prototype.fade = function (fadeDetails) {
+BulbManager.prototype.fade = function (fadeDetails) {
 	var fade = this.fadeFactory.getFadeForEvent(fadeDetails);
 
 	var lights = this.getLightsForGroups(fade.lightGroups);
@@ -28,7 +26,7 @@ GlobeManager.prototype.fade = function (fadeDetails) {
 	this.lifxAdapter.fade(fade, lights);
 }
 
-GlobeManager.prototype.getLightsForGroups = function(groups) {
+BulbManager.prototype.getLightsForGroups = function(groups) {
 	var lightIds = [];
 
 	// TODO do this properly
@@ -44,9 +42,9 @@ GlobeManager.prototype.getLightsForGroups = function(groups) {
 	return lightIds;
 }
 
-GlobeManager.prototype.getLightsForGroup = function(name) {
+BulbManager.prototype.getLightsForGroup = function(name) {
 	// TODO Implement this properly
-	return this.hardCodedGlobes.groups[name];
+	return this.hardCodedBulbs.groups[name];
 }
 
-module.exports = GlobeManager;
+module.exports = BulbManager;

@@ -1,8 +1,8 @@
 var FadeFactory = require('../fade_factory');
 
-// var mockGlobeManager = {
+// var mockBulbManager = {
 // 	fade: function(){
-// 		console.log('mockGlobeManagermockGlobeManagermockGlobeManager');
+// 		console.log('mockBulbManagermockBulbManagermockBulbManager');
 // 	}
 // };
 

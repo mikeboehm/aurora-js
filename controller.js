@@ -1,5 +1,5 @@
-function Controller(globeManager, settingsManager, alarmFactory) {
-	this.globeManager = globeManager;
+function Controller(bulbManager, settingsManager, alarmFactory) {
+	this.bulbManager = bulbManager;
 	this.settingsManager = settingsManager;
 	this.alarmFactory = alarmFactory;
 
@@ -13,7 +13,7 @@ Controller.prototype.init = function() {
 }
 
 Controller.prototype.fade = function(fadeDetails) {
-    this.globeManager.fade(fadeDetails);
+    this.bulbManager.fade(fadeDetails);
 }
 
 module.exports = Controller;
