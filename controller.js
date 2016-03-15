@@ -1,5 +1,5 @@
-function Controller(globeManager, settingsManager, alarmFactory) {
-	this.globeManager = globeManager;
+function Controller(bulbManager, settingsManager, alarmFactory) {
+	this.bulbManager = bulbManager;
 	this.settingsManager = settingsManager;
 	this.alarmFactory = alarmFactory;
 
@@ -12,18 +12,8 @@ Controller.prototype.init = function() {
 	}.bind(this));
 }
 
-// Controller.prototype.turnOn = function() {
-// 	console.log('Controller.prototype.turnOn');
-//     this.globeManager.lightsOn();
-// }
-//
-// Controller.prototype.turnOff = function() {
-// 	console.log('Controller.prototype.turnOff');
-//     this.globeManager.lightsOff();
-// }
-
 Controller.prototype.fade = function(fadeDetails) {
-    this.globeManager.fade(fadeDetails);
+    this.bulbManager.fade(fadeDetails);
 }
 
 module.exports = Controller;

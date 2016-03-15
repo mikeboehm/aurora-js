@@ -1,33 +1,33 @@
-var GlobeManager = require('../globe_manager');
+var BulbManager = require('../bulb_manager');
 
-describe("GlobeManager object", function () {
-	var globeManager = new GlobeManager();
+describe("BulbManager object", function () {
+	var bulbManager = new BulbManager();
 
     it("should be defined", function () {
-		expect(GlobeManager).toBeDefined();
+		expect(BulbManager).toBeDefined();
     });
 });
 
 describe("Get lights for fade", function() {
 	// TODO write better test for this
-	var globeManager = new GlobeManager();
+	var bulbManager = new BulbManager();
 	it("for one group", function(){
 		var groupName = "Bedroom";
-		var lights = globeManager.getLightsForGroup(groupName);
+		var lights = bulbManager.getLightsForGroup(groupName);
 
-		expect(lights).toEqual(globeManager.hardCodedGlobes.groups[groupName]);
+		expect(lights).toEqual(bulbManager.hardCodedBulbs.groups[groupName]);
 	});
 
 	it("for multiple groups", function(){
 		// TODO write better test for this
 		var groupNames = ["Bedroom", "Lounge"];
-		var lights = globeManager.getLightsForGroups(groupNames);
+		var lights = bulbManager.getLightsForGroups(groupNames);
 
 		var count = 0;
 		for (light in lights) {
 			count++;
 		}
-		
+
 		expect(count).toBe(4);
 	});
 });

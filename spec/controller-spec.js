@@ -1,18 +1,18 @@
 var Controller = require('../controller');
 var AlarmFactory = require('../alarm_factory');
-var GlobeManager = require('../globe_manager');
+var BulbManager = require('../bulb_manager');
 
 var moment = require('moment');
 
 var lights = {};
 
 describe("Controller object", function () {
-	var globeManager, settingsManager;
+	var bulbManager, settingsManager;
 	var alarmFactory = new AlarmFactory(lights);
 
     it("should be defined", function () {
 		spyOn(alarmFactory, "init");
-		var controller = new Controller(globeManager, settingsManager, alarmFactory);
+		var controller = new Controller(bulbManager, settingsManager, alarmFactory);
 		expect(Controller).toBeDefined();
 		expect(alarmFactory.init).toHaveBeenCalled();
     });
@@ -21,12 +21,12 @@ describe("Controller object", function () {
 describe("Listens to AlarmFactory", function () {
 	var settingsManager;
 	var alarmFactory = new AlarmFactory(lights);
-	var mockGlobeManager = {
+	var mockBulbManager = {
 		fade: function(){
-			console.log('mockGlobeManagermockGlobeManagermockGlobeManager');
+			console.log('mockBulbManagermockBulbManagermockBulbManager');
 		}
 	};
-	var controller = new Controller(mockGlobeManager, settingsManager, alarmFactory);
+	var controller = new Controller(mockBulbManager, settingsManager, alarmFactory);
 
     it("listen for fade events from AlarmFactory", function () {
 		var listenerCount = alarmFactory.listeners('fade').length;
@@ -38,10 +38,10 @@ describe("Listens to AlarmFactory", function () {
 		expect(listenerCount).toBe(1);
     });
 
-	it("calls GlobeManager when a fade event is detected", function(){
-		spyOn(mockGlobeManager, 'fade');
+	it("calls BulbManager when a fade event is detected", function(){
+		spyOn(mockBulbManager, 'fade');
 		alarmFactory.triggerFade('eventName', 'duration');
 
-		expect(mockGlobeManager.fade).toHaveBeenCalled();
+		expect(mockBulbManager.fade).toHaveBeenCalled();
 	});
 });

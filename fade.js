@@ -1,4 +1,8 @@
 function Fade () {
+	this.POWER_UNCHANGED = 'unchanged';
+	this.POWER_TURN_ON = 'turnOn';
+	this.POWER_TURN_OFF = 'turnOff';
+
 	this.name = '';
 	this.description = '';
 	this.hue = 0;
@@ -9,6 +13,7 @@ function Fade () {
 	this.startTime = null;
 	// this.lights = [];
 	this.lightGroups = [];
+	this.power = 'unchanged';
 }
 Fade.prototype.setName = function(name) {
 	this.name = name;
@@ -122,12 +127,12 @@ Fade.prototype.getLightGroups = function() {
 	return this.lightGroups;
 }
 
+Fade.prototype.setPower = function (power) {
+	this.power = power;
+};
 
-
-
-// var myfade = new Fade();
-//
-// var color = myfade.getColor();
-// console.log(color);
+Fade.prototype.getPower = function () {
+	return this.power;
+};
 
 module.exports = Fade;
