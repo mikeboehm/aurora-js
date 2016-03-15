@@ -1,4 +1,6 @@
 function Fade () {
+	this.name = '';
+	this.description = '';
 	this.hue = 0;
 	this.saturation = 0;
 	this.brightness = 0;
@@ -7,6 +9,17 @@ function Fade () {
 	this.startTime = null;
 	// this.lights = [];
 	this.lightGroups = [];
+}
+Fade.prototype.setName = function(name) {
+	this.name = name;
+
+	return this;
+}
+
+Fade.prototype.setDescription = function(description) {
+	this.description = description;
+
+	return this;
 }
 
 Fade.prototype.setDuration = function(duration) {

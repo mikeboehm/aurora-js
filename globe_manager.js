@@ -21,8 +21,7 @@ function GlobeManager (fadeFactory, lifxAdapter) {
 }
 
 GlobeManager.prototype.fade = function (fadeDetails) {
-	console.log('GlobeManager.prototype.fade()');
-	var fade = fadeFactory.getFadeForEvent(fadeDetails);
+	var fade = this.fadeFactory.getFadeForEvent(fadeDetails);
 
 	var lights = this.getLightsForGroups(fade.lightGroups);
 

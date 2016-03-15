@@ -10,11 +10,13 @@ var moment = require('moment');
  * Daybreak  could be the term for the event at the end of sunrise?
  */
 function Alarm (alarmTime) {
+	var sunriseDurationInMinutes = 30;
+
 	var dawn = moment(alarmTime);
-	dawn.subtract(30, 'minutes');
+	dawn.subtract(sunriseDurationInMinutes, 'minutes');
 
 	var sunrise = moment(alarmTime);
-	sunrise.subtract(15, 'minutes');
+	sunrise.subtract(sunriseDurationInMinutes/2, 'minutes');
 
 	var predawn = moment(dawn);
 	predawn.subtract(10, 'seconds');

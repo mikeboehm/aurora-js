@@ -4,8 +4,6 @@ const EventEmitter = require('events');
 const util = require('util');
 var moment = require('moment');
 
-
-
 function AlarmFactory () {
 	// this.lights = lights;
 	this.alarm = {};
@@ -17,16 +15,30 @@ util.inherits(AlarmFactory, EventEmitter);
 
 AlarmFactory.prototype.init = function() {
 	this.alarm = this.getNextAlarm();
-}
 
+	// for (var index in this.alarm.stages) {
+	// 	var stage = this.alarm.stages[index];
+	// 	console.log(stage.name, stage.time.format());
+	// }
+	this.getNextTimer();
+
+	// this.triggerFade('MYFADE2', 10000);
+	// this.timer = setTimeout(this.triggerFade, 10, 'MYFADE', 10000);
+	// setTimeout(function(){
+	// 	this.triggerFade('MYFADE3', 10000);
+	// }.bind(this), 10);
+
+}
 
 AlarmFactory.prototype.getNextAlarm = function () {
 	var alarmTime = this.getNextAlarmTime();
+	console.log('AlarmFactory.getNextAlarm', alarmTime.format());
 	return this.newAlarm(alarmTime);
 }
 
 // Emit a fade trigger event
 AlarmFactory.prototype.triggerFade = function (eventName, duration) {
+	console.log('AlarmFactory.triggerFade', eventName, duration);
 	this.emit('fade', {name: eventName, duration: duration});
 };
 
@@ -39,7 +51,10 @@ AlarmFactory.prototype.msUntilMoment = function (momentObject) {
 AlarmFactory.prototype.setTimer = function (eventName, duration, delay) {
 	clearTimeout(this.timer);
 
-	this.timer = setTimeout(this.triggerFade, delay, eventName, duration);
+	this.timer = setTimeout(function(eventName, duration){
+		this.triggerFade(eventName, duration);
+		this.getNextTimer();
+	}.bind(this), delay, eventName, duration);
 };
 
 // Gets next alarm event
@@ -53,7 +68,6 @@ AlarmFactory.prototype.getNextTimer = function () {
 		this.alarm = this.getNextAlarm();
 		nextEvent = this.alarm.getNextEvent(now);
 	}
-
 	var delay = this.msUntilMoment(nextEvent.time);
 
 	this.setTimer(nextEvent['name'], nextEvent['duration'], delay);
@@ -62,6 +76,7 @@ AlarmFactory.prototype.getNextTimer = function () {
 
 // Factory method for Alarm
 AlarmFactory.prototype.newAlarm = function(alarmTime) {
+
 	var alarm = new Alarm(alarmTime);
 
 	return alarm;

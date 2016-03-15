@@ -8,7 +8,6 @@ function Controller(globeManager, settingsManager, alarmFactory) {
 
 Controller.prototype.init = function() {
 	this.alarmFactory.on('fade', function(fadeDetails) {
-		console.log('Controller listener');
 		this.fade(fadeDetails);
 	}.bind(this));
 }
@@ -24,7 +23,6 @@ Controller.prototype.init = function() {
 // }
 
 Controller.prototype.fade = function(fadeDetails) {
-	console.log('Controller.prototype.fade');
     this.globeManager.fade(fadeDetails);
 }
 

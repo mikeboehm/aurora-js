@@ -3,32 +3,34 @@ var LifxAdapter = require('./lifx_adapter');
 var GlobeManager = require('./globe_manager');
 var SettingsManager = require('./settings');
 var Contoller = require('./controller');
-
+var AlarmFactory = require('./alarm_factory');
+var FadeFactory = require('./fade_factory');
 
 var client = new LifxClient();
 client.init();
 
 var lifxAdapter = new LifxAdapter(client);
+var fadeFactory = new FadeFactory();
+var globeManager = new GlobeManager(fadeFactory, lifxAdapter);
 
-var globeManager = new GlobeManager(lifxAdapter);
 var settingsManager = new SettingsManager();
-var controller = new Contoller(globeManager, settingsManager);
+var alarmFactory = new AlarmFactory();
+var controller = new Contoller(globeManager, settingsManager, alarmFactory);
 controller.init();
 
-var delayedOff = function (controller) {
-	console.log('callback off run');
-	controller.turnOff();
-}
+// var delayedOff = function (controller) {
+// 	console.log('callback off run');
+// 	controller.turnOff();
+// }
+//
+// var delayedSart = function (controller) {
+// 	console.log('callback on run');
+// 	controller.turnOn();
+// }
 
-
-var delayedSart = function (controller) {
-	console.log('callback on run');
-	controller.turnOn();
-}
-
-setTimeout(delayedOff, 1000, controller);
-
-setTimeout(delayedSart, 3000, controller);
+// setTimeout(delayedOff, 1000, controller);
+//
+// setTimeout(delayedSart, 3000, controller);
 
 // controller.turnOn();
 

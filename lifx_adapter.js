@@ -2,12 +2,12 @@ function LifxAdapter(lifx) {
 	this.lifx = lifx;
 
 	this.lifx.on('light-new', function(light) {
-		console.log('New light: ', light.id);
+		console.log('LifxAdapter.newLight', 'lightId:', light.id);
 	});
 }
 
 LifxAdapter.prototype.fade = function(fade, lights) {
-	console.log('LifxAdapter.prototype.fade');
+	console.log('LifxAdapter.fade', 'Event name:', fade.name);
 	var color = fade.getColor();
 	var hue = color.hue;
 	var saturation = color.saturation;
@@ -16,13 +16,13 @@ LifxAdapter.prototype.fade = function(fade, lights) {
 	var duration = fade.getDuration();
 
 	for (var lightId in lights) {
-		console.log('lightId', lightId);
+		console.log('LifxAdapter.fade', 'Set color on lightId:', lightId);
 		this.lifx.light(lightId).color(hue, saturation, brightness, kelvin, duration);
 	}
 }
 
 LifxAdapter.prototype.lightsOn = function() {
-	console.log('LifxAdapter.prototype.lightsOn');
+	console.log('LifxAdapter.lightsOn');
 	var lights = this.lifx.lights();
 	for (var lightIndex in lights) {
 		var light = lights[lightIndex];
@@ -33,7 +33,7 @@ LifxAdapter.prototype.lightsOn = function() {
 }
 
 LifxAdapter.prototype.lightsOff = function() {
-	console.log('LifxAdapter.prototype.lightsOff');
+	console.log('LifxAdapter.lightsOff');
 	var lights = this.lifx.lights();
 	for (var lightIndex in lights) {
 		var light = lights[lightIndex];
