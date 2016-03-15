@@ -13,8 +13,13 @@ Settings.prototype.getSettings = function() {
 	return this.settings;
 }
 
+Settings.prototype.getAlarmSettings = function() {
+	return this.settings['sunrise'];
+}
+
 Settings.prototype.getAlarmForDay = function(dayNumber) {
-	return this.settings.days[dayNumber].alarm;
+	var alarmSettings = this.getAlarmSettings();
+	return alarmSettings.days[dayNumber].alarm;
 }
 
 Settings.prototype.location = function() {

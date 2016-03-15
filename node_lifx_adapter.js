@@ -92,16 +92,6 @@ LifxAdapter.prototype.fade = function(fadeObj) {
 			light.color(fadeObj.hue, fadeObj.saturation, fadeObj.brightness, fadeObj.kelvin, fadeObj.duration);
 		}
 	}
-/*
-	var night = {
-		hue: 0,
-		saturation: 65535,
-		brightness: 0,
-		kelvin: 2500,
-		duration: 2000
-    }
-*/
-	// this.lifx.lightsColour(fadeObj.hue, fadeObj.saturation, fadeObj.brightness, fadeObj.kelvin, fadeObj.duration);
 }
 
 LifxAdapter.prototype.getBulbs = function() {

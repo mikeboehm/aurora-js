@@ -1,17 +1,54 @@
-var Settings = require('./settings.js');
-var Alarm = require('./alarm_mode.js');
-var Aurora = require('./aurora.js');
-
-var LightsAdapter = require('./node_lifx_adapter.js');
 var LifxClient = require('node-lifx').Client;
+var LifxAdapter = require('./lifx_adapter');
+var GlobeManager = require('./globe_manager');
+var SettingsManager = require('./settings');
+var Contoller = require('./controller');
+var AlarmFactory = require('./alarm_factory');
+var FadeFactory = require('./fade_factory');
 
 var client = new LifxClient();
 client.init();
 
-var lightsAdapter = new LightsAdapter(client);
-var settings = new Settings();
-var alarm = new Alarm(settings);
-var aurora = new Aurora(lightsAdapter, alarm);
+var lifxAdapter = new LifxAdapter(client);
+var fadeFactory = new FadeFactory();
+var globeManager = new GlobeManager(fadeFactory, lifxAdapter);
+
+var settingsManager = new SettingsManager();
+var alarmFactory = new AlarmFactory();
+var controller = new Contoller(globeManager, settingsManager, alarmFactory);
+controller.init();
+
+// var delayedOff = function (controller) {
+// 	console.log('callback off run');
+// 	controller.turnOff();
+// }
+//
+// var delayedSart = function (controller) {
+// 	console.log('callback on run');
+// 	controller.turnOn();
+// }
+
+// setTimeout(delayedOff, 1000, controller);
+//
+// setTimeout(delayedSart, 3000, controller);
+
+// controller.turnOn();
+
+
+// var Settings = require('./settings.js');
+// var Alarm = require('./alarm_mode.js');
+// var Aurora = require('./aurora.js');
+//
+// var LightsAdapter = require('./node_lifx_adapter.js');
+// var LifxClient = require('node-lifx').Client;
+//
+// var client = new LifxClient();
+// client.init();
+//
+// var lightsAdapter = new LightsAdapter(client);
+// var settings = new Settings();
+// var alarm = new Alarm(settings);
+// var aurora = new Aurora(lightsAdapter, alarm);
 
 // GPIO Test
 // var Gpio = require('onoff').Gpio,
