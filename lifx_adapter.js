@@ -14,10 +14,19 @@ LifxAdapter.prototype.fade = function(fade, lights) {
 	var brightness = color.brightness;
 	var kelvin = color.kelvin;
 	var duration = fade.getDuration();
+	var powerInstruction = fade.getPower();
 
 	for (var lightId in lights) {
 		console.log('LifxAdapter.fade', 'Set color on lightId:', lightId);
+		if (powerInstruction == fade.POWER_TURN_ON) {
+			this.lightsOn();
+		}
+
 		this.lifx.light(lightId).color(hue, saturation, brightness, kelvin, duration);
+
+		if (powerInstruction == fade.POWER_TURN_OFF) {
+			this.lightsOff();
+		}
 	}
 }
 

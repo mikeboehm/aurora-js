@@ -7,7 +7,8 @@
 			"brightness": 0,
 			"kelvin": 2500
 		},
-		"lightGroups": ["Bedroom"]
+		"lightGroups": ["Bedroom"],
+		"power": "unchanged"
 	},
 	"dawn": {
 		"description": "full red",
@@ -17,7 +18,8 @@
 			"brightness": 100,
 			"kelvin": 2500
 		},
-		"lightGroups": ["Bedroom"]
+		"lightGroups": ["Bedroom"],
+		"power": "turnOn"
 	},
 	"sunrise": {
 		"description": "Full daylight",
@@ -27,7 +29,8 @@
 			"brightness": 100,
 			"kelvin": 9000
 		},
-		"lightGroups": ["Bedroom"]
+		"lightGroups": ["Bedroom"],
+		"power": "unchanged"
 	},
 	"shutoff": {
 		"description": "fade off",
@@ -37,6 +40,7 @@
 			"brightness": 0,
 			"kelvin": 2500
 		},
-		"lightGroups": ["Bedroom"]
+		"lightGroups": ["Bedroom"],
+		"power": "turnOff"
 	}
 }

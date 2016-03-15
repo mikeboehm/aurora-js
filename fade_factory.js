@@ -8,7 +8,7 @@ function FadeFactory() {
 FadeFactory.prototype.getFadeForEvent = function (eventDetails) {
 	// { name: 'eventName', duration: 'duration' }
 	var eventSettings = this.getEventSettings(eventDetails.name);
-	
+
 	var color = eventSettings.color;
 	var lightGroups = eventSettings.lightGroups;
 	var duration  = eventDetails.duration;
@@ -20,6 +20,7 @@ FadeFactory.prototype.getFadeForEvent = function (eventDetails) {
 	fade.setDuration(duration);
 	fade.setColor(color);
 	fade.setLightGroups(lightGroups);
+	fade.setPower(eventSettings.power);
 
 	return fade;
 };
