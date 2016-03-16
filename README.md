@@ -54,8 +54,6 @@
 - Has a method to provide fades for supplied lights
 
 
-
-
 ### Sunrise
 *A sequence of fades. Can include a prefade?*
 * Optional: reset initial color (leave power mode unchanged)
