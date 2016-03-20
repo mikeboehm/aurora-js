@@ -6,6 +6,10 @@ var Contoller = require('./controller');
 var AlarmFactory = require('./alarm_factory');
 var FadeFactory = require('./fade_factory');
 
+log('=============================================');
+console.log(process.env);
+log('=============================================');
+
 var client = new LifxClient();
 client.init();
 
