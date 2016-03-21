@@ -2,6 +2,7 @@ var FadeFactory = require('./fade_factory');
 
 function BulbManager (fadeFactory, lifxAdapter) {
 	this.bulbs = {}
+	this.groupState = {};
 	this.fadeFactory = fadeFactory;
 	this.lifxAdapter = lifxAdapter;
 	this.hardCodedBulbs = {
@@ -12,10 +13,25 @@ function BulbManager (fadeFactory, lifxAdapter) {
 			],
 			"Lounge": [
 				"d073d501f660",	    // booze
-				"d073d500ec68"		// couch
+				"d073d500ec68",		// couch
+				"d073d502061f"    	// Meelah
 			],
 		}
 	};
+}
+
+BulbManager.prototype.toggle = function (groupName) {
+	if (this.lightGroupIsOn(groupName)) {
+		console.log('//TODO Implement BulbManager toggle');
+	}
+}
+
+BulbManager.prototype.lightGroupIsOn = function(groupName) {
+	if (typeof this.groupState[groupName] === "undefined") {
+		this.groupState[groupName] = false;
+	}
+
+	return this.groupState[groupName];
 }
 
 BulbManager.prototype.fade = function (fadeDetails) {

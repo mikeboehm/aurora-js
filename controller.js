@@ -16,4 +16,9 @@ Controller.prototype.fade = function(fadeDetails) {
     this.bulbManager.fade(fadeDetails);
 }
 
+Controller.prototype.toggle = function(groupName) {
+    this.bulbManager.toggle(groupName);
+}
+
+
 module.exports = Controller;
