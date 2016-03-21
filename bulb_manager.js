@@ -9,28 +9,47 @@ function BulbManager (fadeFactory, lifxAdapter) {
 		"groups": {
 			"Bedroom": [
 				"d073d501bd50",	    // bedside
-				"d073d5124f57"      // ceiling
+				"d073d5124f57",     // ceiling
+				"d073d502061f"    	// Meelah
 			],
 			"Lounge": [
 				"d073d501f660",	    // booze
-				"d073d500ec68",		// couch
-				"d073d502061f"    	// Meelah
+				"d073d500ec68"		// couch
 			],
 		}
 	};
 }
 
 BulbManager.prototype.toggle = function (groupName) {
+	console.log('BulbManager.toggle', groupName);
 	if (this.lightGroupIsOn(groupName)) {
-		console.log('//TODO Implement BulbManager toggle');
+		this.lightsOff(groupName);
+		this.groupState[groupName] = false;
+	} else {
+		this.lightsOn(groupName);
+		this.groupState[groupName] = true;
+
 	}
 }
+
+BulbManager.prototype.lightsOn = function(groupName) {
+	console.log('BulbManager.lightOn', groupName);
+	var lights = this.getLightsForGroups(groupName);
+	this.lifxAdapter.lightsOn(lights);
+}
+
+BulbManager.prototype.lightsOff = function(groupName) {
+	console.log('BulbManager.lightsOff', groupName);
+	var lights = this.getLightsForGroups(groupName);
+	this.lifxAdapter.lightsOff(lights);
+}
+
 
 BulbManager.prototype.lightGroupIsOn = function(groupName) {
 	if (typeof this.groupState[groupName] === "undefined") {
 		this.groupState[groupName] = false;
 	}
-
+	console.log('BulbManager.lightGroupIsOn', groupName, this.groupState[groupName]);
 	return this.groupState[groupName];
 }
 

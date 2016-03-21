@@ -19,37 +19,31 @@ LifxAdapter.prototype.fade = function(fade, lights) {
 	for (var lightId in lights) {
 		console.log('LifxAdapter.fade', 'Set color on lightId:', lightId);
 		if (powerInstruction == fade.POWER_TURN_ON) {
-			this.lightsOn();
+			this.lightsOn([lightId]);
 		}
 
 		this.lifx.light(lightId).color(hue, saturation, brightness, kelvin, duration);
 
 		if (powerInstruction == fade.POWER_TURN_OFF) {
-			this.lightsOff();
+			this.lightsOff([lightId]);
 		}
 	}
 }
 
-LifxAdapter.prototype.lightsOn = function() {
-	console.log('LifxAdapter.lightsOn');
-	var lights = this.lifx.lights();
+LifxAdapter.prototype.lightsOn = function(lights) {
 	for (var lightIndex in lights) {
 		var light = lights[lightIndex];
-		light.on();
-		console.log(light.id);
+		console.log('LifxAdapter.lightsOn', lightId);
+		this.lifx.light(lightId).on(100);
 	}
-	// this.lifx.lightsOn();
 }
 
-LifxAdapter.prototype.lightsOff = function() {
-	console.log('LifxAdapter.lightsOff');
-	var lights = this.lifx.lights();
+LifxAdapter.prototype.lightsOff = function(lights) {
 	for (var lightIndex in lights) {
 		var light = lights[lightIndex];
-		light.off();
-		console.log(light.id);
+		console.log('LifxAdapter.lightsOff', lightId);
+		this.lifx.light(lightId).off(100);
 	}
-	// this.lifx.lightsOff();
 }
 
 module.exports = LifxAdapter;
