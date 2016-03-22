@@ -6,6 +6,19 @@ var Contoller = require('./controller');
 var AlarmFactory = require('./alarm_factory');
 var FadeFactory = require('./fade_factory');
 
+// ======== MOCK MOCK LIFX CLIENT
+const EventEmitter = require('events');
+const util = require('util');
+
+function MockLifxClient () {
+}
+
+util.inherits(MockLifxClient, EventEmitter);
+mockLifxClient = new MockLifxClient();
+// ======== END MOCK LIFX CLIENT
+
+
+
 var lightGroups = {};
 var BUTTON_GPIO_PIN = 0;
 var AURORA_DEBOUNCE_DELAY = 500;
@@ -35,6 +48,9 @@ var client = new LifxClient();
 client.init();
 
 var lifxAdapter = new LifxAdapter(client);
+// var lifxAdapter = new LifxAdapter(mockLifxClient); // Mock Lifx client
+lifxAdapter.init();
+
 var fadeFactory = new FadeFactory();
 var bulbManager = new BulbManager(fadeFactory, lifxAdapter, lightGroups);
 
@@ -57,6 +73,10 @@ if (BUTTON_GPIO_PIN > 0){
 	console.log('Index: GPIO ready');
 } else {
 	console.log('Index: GPIO disabled');
+	console.log('Index: Automatic toggle');
+	setInterval(function(){
+		controller.toggle('Bedroom');
+	}, 20000);
 }
 
 
