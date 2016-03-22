@@ -16,10 +16,6 @@ util.inherits(AlarmFactory, EventEmitter);
 AlarmFactory.prototype.init = function() {
 	this.alarm = this.getNextAlarm();
 
-	// for (var index in this.alarm.stages) {
-	// 	var stage = this.alarm.stages[index];
-	// 	console.log(stage.name, stage.time.format());
-	// }
 	this.getNextTimer();
 
 	// this.triggerFade('MYFADE2', 10000);

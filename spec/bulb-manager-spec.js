@@ -21,13 +21,13 @@ describe("Get lights for fade", function() {
 	it("for multiple groups", function(){
 		// TODO write better test for this
 		var groupNames = ["Bedroom", "Lounge"];
-		var lights = bulbManager.getLightsForGroups(groupNames);
+		var lights = bulbManager.getLightsForMultipleGroups(groupNames);
 
 		var count = 0;
 		for (light in lights) {
 			count++;
 		}
 
-		expect(count).toBe(4);
+		expect(count).toBe(5);
 	});
 });

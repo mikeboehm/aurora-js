@@ -34,13 +34,14 @@ BulbManager.prototype.toggle = function (groupName) {
 
 BulbManager.prototype.lightsOn = function(groupName) {
 	console.log('BulbManager.lightOn', groupName);
-	var lights = this.getLightsForGroups(groupName);
+	var lights = this.getLightsForGroup(groupName);
 	this.lifxAdapter.lightsOn(lights);
 }
 
 BulbManager.prototype.lightsOff = function(groupName) {
 	console.log('BulbManager.lightsOff', groupName);
-	var lights = this.getLightsForGroups(groupName);
+	var lights = this.getLightsForGroup(groupName);
+	console.log(lights);
 	this.lifxAdapter.lightsOff(lights);
 }
 
@@ -56,12 +57,12 @@ BulbManager.prototype.lightGroupIsOn = function(groupName) {
 BulbManager.prototype.fade = function (fadeDetails) {
 	var fade = this.fadeFactory.getFadeForEvent(fadeDetails);
 
-	var lights = this.getLightsForGroups(fade.lightGroups);
+	var lights = this.getLightsForMultipleGroups(fade.lightGroups);
 
 	this.lifxAdapter.fade(fade, lights);
 }
 
-BulbManager.prototype.getLightsForGroups = function(groups) {
+BulbManager.prototype.getLightsForMultipleGroups = function(groups) {
 	var lightIds = [];
 
 	// TODO do this properly
