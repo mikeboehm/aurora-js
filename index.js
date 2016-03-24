@@ -24,7 +24,9 @@ var BUTTON_GPIO_PIN = 0;
 var AURORA_DEBOUNCE_DELAY = 500;
 
 // Parse Environmental variables
-// console.log(process.env);
+console.log('=================================');
+console.log(process.env);
+console.log('=================================');
 for (env in process.env) {
 	var envNameIsRelevant = env.indexOf('AURORA_') > -1;
 	if (envNameIsRelevant) {
@@ -76,7 +78,7 @@ if (BUTTON_GPIO_PIN > 0){
 	console.log('Index: Automatic toggle');
 	setInterval(function(){
 		controller.toggle('Bedroom');
-	}, 20000);
+	}, 5000);
 }
 
 
