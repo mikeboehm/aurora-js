@@ -5,7 +5,9 @@ var SettingsManager = require('./settings');
 var Contoller = require('./controller');
 var AlarmFactory = require('./alarm_factory');
 var FadeFactory = require('./fade_factory');
-var moment = require('moment');
+// var moment = require('moment');
+var moment = require('moment-timezone');
+
 
 // ======== MOCK MOCK LIFX CLIENT
 const EventEmitter = require('events');
@@ -21,22 +23,19 @@ mockLifxClient = new MockLifxClient();
 var lightGroups = {};
 var BUTTON_GPIO_PIN = 0;
 var AURORA_DEBOUNCE_DELAY = 500;
-
-console.log('=================================');
-var now = moment();
-console.log(now.format());
-console.log('=================================');
-
+var TIMEZONE = 'etc/UTC';
 
 // Parse Environmental variables
-console.log('=================================');
-console.log(process.env);
-console.log('=================================');
+console.log('=========== ENVIRONMENTAL VARIABLES ===========');
 for (env in process.env) {
 	var envNameIsRelevant = env.indexOf('AURORA_') > -1;
 	if (envNameIsRelevant) {
 		console.log(env, process.env[env]);
 	}
+}
+
+if (typeof process.env.AURORA_TZ != "undefined") {
+    TIMEZONE = process.env.AURORA_TZ;
 }
 
 if (typeof process.env.AURORA_LIGHTS != "undefined") {
@@ -51,6 +50,14 @@ if (typeof process.env.AURORA_DEBOUNCE_DELAY != "undefined") {
     DEBOUNCE_DELAY = parseInt(process.env.AURORA_DEBOUNCE_DELAY);
 }
 
+console.log('=========== TIMEZONES ===========');
+console.log('TIMEZONE', TIMEZONE);
+console.log('System', moment().format());
+console.log('Timezone', moment().tz(TIMEZONE).format());
+console.log('=================================');
+
+
+
 var client = new LifxClient();
 client.init();
 
@@ -62,7 +69,7 @@ var fadeFactory = new FadeFactory();
 var bulbManager = new BulbManager(fadeFactory, lifxAdapter, lightGroups);
 
 var settingsManager = new SettingsManager();
-var alarmFactory = new AlarmFactory();
+var alarmFactory = new AlarmFactory(TIMEZONE);
 var controller = new Contoller(bulbManager, settingsManager, alarmFactory);
 controller.init();
 
@@ -81,9 +88,9 @@ if (BUTTON_GPIO_PIN > 0){
 } else {
 	console.log('Index: GPIO disabled');
 	console.log('Index: Automatic toggle');
-	setInterval(function(){
-		controller.toggle('Bedroom');
-	}, 5000);
+	// setInterval(function(){
+	// 	controller.toggle('Bedroom');
+	// }, 5000);
 }
 
 

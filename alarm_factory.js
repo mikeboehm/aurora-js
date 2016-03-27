@@ -2,10 +2,13 @@ var Alarm = require('./alarm');
 
 const EventEmitter = require('events');
 const util = require('util');
-var moment = require('moment');
+// var moment = require('moment');
+var moment = require('moment-timezone');
 
-function AlarmFactory () {
+function AlarmFactory (timezone) {
+	moment.tz.setDefault(timezone);
 	// this.lights = lights;
+	this.timezone = timezone;
 	this.alarm = {};
 	this.timer = setTimeout(function(){}, 0);
 	EventEmitter.call(this);
@@ -15,20 +18,14 @@ util.inherits(AlarmFactory, EventEmitter);
 
 AlarmFactory.prototype.init = function() {
 	this.alarm = this.getNextAlarm();
-
 	this.getNextTimer();
-
-	// this.triggerFade('MYFADE2', 10000);
-	// this.timer = setTimeout(this.triggerFade, 10, 'MYFADE', 10000);
-	// setTimeout(function(){
-	// 	this.triggerFade('MYFADE3', 10000);
-	// }.bind(this), 10);
-
 }
 
 AlarmFactory.prototype.getNextAlarm = function () {
 	var alarmTime = this.getNextAlarmTime();
 	console.log('AlarmFactory.getNextAlarm', alarmTime.format());
+	var tillAlarm = alarmTime - moment();
+	console.log('Hours until next alarm: ', tillAlarm / 1000/60/60);
 	return this.newAlarm(alarmTime);
 }
 
