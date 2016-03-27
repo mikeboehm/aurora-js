@@ -5,6 +5,7 @@ var SettingsManager = require('./settings');
 var Contoller = require('./controller');
 var AlarmFactory = require('./alarm_factory');
 var FadeFactory = require('./fade_factory');
+var moment = require('moment');
 
 // ======== MOCK MOCK LIFX CLIENT
 const EventEmitter = require('events');
@@ -17,11 +18,15 @@ util.inherits(MockLifxClient, EventEmitter);
 mockLifxClient = new MockLifxClient();
 // ======== END MOCK LIFX CLIENT
 
-
-
 var lightGroups = {};
 var BUTTON_GPIO_PIN = 0;
 var AURORA_DEBOUNCE_DELAY = 500;
+
+console.log('=================================');
+var now = moment();
+console.log(now.format());
+console.log('=================================');
+
 
 // Parse Environmental variables
 console.log('=================================');
