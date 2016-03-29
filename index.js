@@ -61,6 +61,10 @@ console.log('=================================');
 var client = new LifxClient();
 client.init();
 
+client.on('light-new', function(light) {
+	console.log('Index: light-new', 'lightId:', light.id);
+});
+
 var lifxAdapter = new LifxAdapter(client);
 // var lifxAdapter = new LifxAdapter(mockLifxClient); // Mock Lifx client
 lifxAdapter.init();
