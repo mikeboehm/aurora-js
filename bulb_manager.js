@@ -33,15 +33,15 @@ BulbManager.prototype.toggle = function (groupName) {
 }
 
 BulbManager.prototype.lightsOn = function(groupName) {
-	console.log('BulbManager.lightOn', groupName);
+	// console.log('BulbManager.lightOn', groupName);
 	var lights = this.getLightsForGroup(groupName);
 	this.lifxAdapter.lightsOn(lights);
 }
 
 BulbManager.prototype.lightsOff = function(groupName) {
-	console.log('BulbManager.lightsOff', groupName);
+	// console.log('BulbManager.lightsOff', groupName);
 	var lights = this.getLightsForGroup(groupName);
-	console.log(lights);
+	// console.log(lights);
 	this.lifxAdapter.lightsOff(lights);
 }
 
@@ -50,7 +50,7 @@ BulbManager.prototype.lightGroupIsOn = function(groupName) {
 	if (typeof this.groupState[groupName] === "undefined") {
 		this.groupState[groupName] = false;
 	}
-	console.log('BulbManager.lightGroupIsOn', groupName, this.groupState[groupName]);
+	// console.log('BulbManager.lightGroupIsOn', groupName, this.groupState[groupName]);
 	return this.groupState[groupName];
 }
 

@@ -85,7 +85,7 @@ if (BUTTON_GPIO_PIN > 0){
 		});
 
 	button.watch(function(err, value) {
-		console.log('index: GPIO button pressed');
+		// console.log('index: GPIO button pressed');
 		controller.toggle('Bedroom');
 	});
 	console.log('Index: GPIO ready');
