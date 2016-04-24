@@ -76,23 +76,27 @@ LifxAdapter.prototype.fade = function(fade, lights) {
 	}
 }
 
-LifxAdapter.prototype.lightsOn = function(lights) {
+LifxAdapter.prototype.lightsOn = function(lights, duration) {
+	duration = typeof duration !== 'undefined' ? duration : 100;
+
 	for (var lightIndex in lights) {
 		var lightId = lights[lightIndex];
 		if (this.lightIsOnline(lightId)) {
-			console.log('LifxAdapter.lightsOn', lightId);
+			console.log('LifxAdapter.lightsOn', lightId, duration);
 			// TODO handle failure
-			this.lifx.light(lightId).on(100);
+			this.lifx.light(lightId).on(duration);
 		}
 	}
 }
 
-LifxAdapter.prototype.lightsOff = function(lights) {
+LifxAdapter.prototype.lightsOff = function(lights, duration) {
+	duration = typeof duration !== 'undefined' ? duration : 5000;
+
 	for (var lightIndex in lights) {
 		var lightId = lights[lightIndex];
 		if (this.lightIsOnline(lightId)) {
-			console.log('LifxAdapter.lightsOff', lightId);
-			this.lifx.light(lightId).off(100);
+			console.log('LifxAdapter.lightsOff', lightId, duration);
+			this.lifx.light(lightId).off(duration);
 		}
 	}
 }
