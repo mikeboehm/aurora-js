@@ -7,7 +7,7 @@ var AlarmFactory = require('./alarm_factory');
 var FadeFactory = require('./fade_factory');
 // var moment = require('moment');
 var moment = require('moment-timezone');
-
+var express = require('express');
 
 // ======== MOCK MOCK LIFX CLIENT
 const EventEmitter = require('events');
@@ -77,6 +77,29 @@ var alarmFactory = new AlarmFactory(TIMEZONE);
 var controller = new Contoller(bulbManager, settingsManager, alarmFactory);
 controller.init();
 
+
+console.log('=========== WEB SERVER ===========');
+var app = express();
+
+app.get('/', function (req, res) {
+	console.log('root!');
+	res.send('Nothing to see here yet. Try <a href="/toggle/Bedroom">/toggle/Bedroom</a>');
+});
+
+app.get('/toggle/:group', function (req, res) {
+	var group = req.params['group'];
+	console.log('Web.toggle:', group);
+	controller.toggle(group);
+	res.send('');
+});
+
+app.listen(3000, function () {
+	console.log('Aurora app listening on port 3000!');
+});
+
+
+
+console.log('=========== GPIO LISTENER ===========');
 if (BUTTON_GPIO_PIN > 0){
 	// GPIO listener
 	var Gpio = require('onoff').Gpio,
