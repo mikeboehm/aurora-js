@@ -24,12 +24,15 @@ function Alarm (alarmTime) {
 	var shutoff = moment(alarmTime);
 	shutoff.add(90, 'minutes');
 
+	var postshutoff = moment(shutoff);
+	postshutoff.add(15, 'seconds');
 
 	this.stages = {
 		'predawn': {name: 'predawn', time: predawn, duration: 1000}, // 1 sec
 		'dawn': {name: 'dawn', time: dawn, duration: 900000}, // 15 mins
 		'sunrise': {name: 'sunrise', time: sunrise, duration: 900000}, // 15 mins
-		'shutoff': {name: 'shutoff', time: shutoff, duration: 10000} // 10 secs
+		'shutoff': {name: 'shutoff', time: shutoff, duration: 10000}, // 10 secs
+		'postshutoff': {name: 'postshutoff', time: postshutoff, duration: 1000} // 1 sec
 	};
 }
 

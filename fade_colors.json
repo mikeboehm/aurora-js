@@ -42,5 +42,16 @@
 		},
 		"lightGroups": ["Bedroom"],
 		"power": "turnOff"
+	},
+	"postshutoff": {
+		"description": "reset lights",
+		"color": {
+			"hue": 0,
+			"saturation": 0,
+			"brightness": 100,
+			"kelvin": 2500
+		},
+		"lightGroups": ["Bedroom"],
+		"power": "unchanged"
 	}
 }

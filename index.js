@@ -114,7 +114,7 @@ if (BUTTON_GPIO_PIN > 0){
 	console.log('Index: GPIO ready');
 } else {
 	console.log('Index: GPIO disabled');
-	console.log('Index: Automatic toggle');
+	// console.log('Index: Automatic toggle');
 	// setInterval(function(){
 	// 	controller.toggle('Bedroom');
 	// }, 5000);
