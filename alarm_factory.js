@@ -69,7 +69,6 @@ AlarmFactory.prototype.getNextTimer = function () {
 
 // Factory method for Alarm
 AlarmFactory.prototype.newAlarm = function(alarmTime) {
-
 	var alarm = new Alarm(alarmTime);
 
 	return alarm;
@@ -88,7 +87,7 @@ AlarmFactory.prototype.getNextAlarmTime = function() {
 	var alarm = this.newAlarm(alarmTime);
 
 	// Get tomorrow's if there are no remaining events for the today's alarm
-	if (alarm.getNextEvent() == false) {
+	if (alarm.getNextEvent(now) == false) {
 		alarmTime.add(1, 'day');
 
 		var tomorrowAlarmTime = this.getAlarmTimeForDayNumber(alarmTime.day());
