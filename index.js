@@ -10,19 +10,21 @@ var moment = require('moment-timezone');
 var express = require('express');
 
 // ======== MOCK MOCK LIFX CLIENT
-const EventEmitter = require('events');
-const util = require('util');
-
-function MockLifxClient () {
-}
-
-util.inherits(MockLifxClient, EventEmitter);
-mockLifxClient = new MockLifxClient();
+// const EventEmitter = require('events');
+// const util = require('util');
+//
+// function MockLifxClient () {
+// }
+//
+// util.inherits(MockLifxClient, EventEmitter);
+// mockLifxClient = new MockLifxClient();
 // ======== END MOCK LIFX CLIENT
 
 var lightGroups = {};
 var BUTTON_GPIO_PIN = 0;
 var AURORA_DEBOUNCE_DELAY = 500;
+// Set timezone temporarily by entering the below in your console
+// export AURORA_TZ='europe/London'
 var TIMEZONE = 'etc/UTC';
 
 // Parse Environmental variables
@@ -61,9 +63,9 @@ console.log('=================================');
 var client = new LifxClient();
 client.init();
 
-client.on('light-new', function(light) {
-	console.log('Index: light-new', 'lightId:', light.id);
-});
+// client.on('light-new', function(light) {
+// 	console.log('Index: light-new', 'lightId:', light.id);
+// });
 
 var lifxAdapter = new LifxAdapter(client);
 // var lifxAdapter = new LifxAdapter(mockLifxClient); // Mock Lifx client
