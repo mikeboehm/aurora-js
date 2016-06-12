@@ -4,11 +4,9 @@ var BulbManager = require('../bulb_manager');
 
 var moment = require('moment');
 
-var lights = {};
-
 describe("Controller object", function () {
 	var bulbManager, settingsManager;
-	var alarmFactory = new AlarmFactory(lights);
+	var alarmFactory = new AlarmFactory();
 
     it("should be defined", function () {
 		spyOn(alarmFactory, "init");
@@ -20,7 +18,7 @@ describe("Controller object", function () {
 
 describe("Listens to AlarmFactory", function () {
 	var settingsManager;
-	var alarmFactory = new AlarmFactory(lights);
+	var alarmFactory = new AlarmFactory();
 	var mockBulbManager = {
 		fade: function(){
 			console.log('mockBulbManagermockBulbManagermockBulbManager');
