@@ -1,5 +1,6 @@
 var LifxClient = require('node-lifx').Client;
 var LifxAdapter = require('./lifx_adapter');
+var LightLibrary = require('./light_library');
 var BulbManager = require('./bulb_manager');
 var SettingsManager = require('./settings');
 var Contoller = require('./controller');
@@ -67,7 +68,8 @@ client.init();
 // 	console.log('Index: light-new', 'lightId:', light.id);
 // });
 
-var lifxAdapter = new LifxAdapter(client);
+var lightLibrary = new LightLibrary();
+var lifxAdapter = new LifxAdapter(client, lightLibrary);
 // var lifxAdapter = new LifxAdapter(mockLifxClient); // Mock Lifx client
 lifxAdapter.init();
 

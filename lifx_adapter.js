@@ -1,23 +1,26 @@
-function LifxAdapter(lifx) {
+function LifxAdapter(lifx, lightLibrary) {
 	var self = this;
 	self.lifx = lifx;
+	self.lightLibrary = lightLibrary;
 
 	self.lights = {};
+	self.lightObjects = {};
 
 	self.init = function () {
-		this.lifx.on('light-new', function(light) {
+		self.lifx.on('light-new', function(light) {
 			console.log('LifxAdapter.light-new', 'lightId:', light.id);
-			this._setLightAsOnline(light.id);
-		}.bind(this));
+			this.lightLibrary.newLight(light.id);
+			this.lightLibrary.setLightOnline(light.id);
+		}.bind(self));
 
 		this.lifx.on('light-offline', function(light) {
 			console.log('LifxAdapter.light-offline', 'lightId:', light.id);
-			this._setLightAsOffline(light.id);
+			this.lightLibrary.setLightOffline(light.id);
 		}.bind(this));
 
 		this.lifx.on('light-online', function(light) {
 			console.log('LifxAdapter.light-online', 'lightId:', light.id);
-			this._setLightAsOnline(light.id);
+			this.lightLibrary.setLightOnline(light.id);
 		}.bind(this));
 	}
 
@@ -30,23 +33,8 @@ function LifxAdapter(lifx) {
 	};
 
 	self.lightIsOnline = function (lightId) {
-		if (typeof this._getLight(lightId) === 'undefined') {
-			this._setLight(lightId, false);
-		}
-
-		return this._getLight(lightId);
+		return this.lightLibrary.lightIsOnline(lightId);
 	};
-
-	self._setLightAsOnline = function (lightId) {
-		console.log('LifxAdapter._setLightAsOnline', lightId);
-		this._setLight(lightId, true);
-	};
-
-	self._setLightAsOffline = function (lightId) {
-		console.log('LifxAdapter._setLightAsOffline', lightId);
-		this._setLight(lightId, false);
-	};
-
 
 	self.fade = function(fade, lights) {
 		console.log('LifxAdapter.fade', 'Event name:', fade.name);
@@ -60,27 +48,33 @@ function LifxAdapter(lifx) {
 
 		// TODO refactor this into something neater
 		for (var lightId in lights) {
-			if (this.lightIsOnline(lightId)) {
-				console.log('LifxAdapter.fade', 'Set color on lightId:', lightId);
-				if (powerInstruction == fade.POWER_TURN_ON) {
-					this.lightsOn([lightId]);
-				}
+			console.log('LifxAdapter.fade', 'Set color on lightId:', lightId);
+			self.lightLibrary.setFade(lightId, fade);
 
+			if (powerInstruction == fade.POWER_TURN_ON) {
+				self.lightLibrary.setLightPowerOn(lightId);
+				this.lightsOn([lightId]);
+			}
+
+			if (this.lightIsOnline(lightId)) {
 				// TODO handle failure
 				this.lifx.light(lightId).color(hue, saturation, brightness, kelvin, duration);
+			}
 
-				if (powerInstruction == fade.POWER_TURN_OFF) {
-					this.lightsOff([lightId]);
-				}
+			if (powerInstruction == fade.POWER_TURN_OFF) {
+				self.lightLibrary.setLightPowerOff(lightId);
+				this.lightsOff([lightId]);
 			}
 		}
 	}
 
+	// TODO refactor to consolodate with `self.lightsOff()`
 	self.lightsOn = function(lights, duration) {
-		duration = typeof duration !== 'undefined' ? duration : 100;
+		duration = duration ? duration : 100;
 
 		for (var lightIndex in lights) {
 			var lightId = lights[lightIndex];
+			self.lightLibrary.setLightPowerOn(lightId);
 			if (this.lightIsOnline(lightId)) {
 				console.log('LifxAdapter.lightsOn', lightId, duration);
 				// TODO handle failure
@@ -89,11 +83,13 @@ function LifxAdapter(lifx) {
 		}
 	}
 
+	// TODO refactor to consolodate with `self.lightsOn()`
 	self.lightsOff = function(lights, duration) {
-		duration = typeof duration !== 'undefined' ? duration : 5000;
+		duration = duration ? duration : 2500;
 
 		for (var lightIndex in lights) {
 			var lightId = lights[lightIndex];
+			self.lightLibrary.setLightPowerOff(lightId);
 			if (this.lightIsOnline(lightId)) {
 				console.log('LifxAdapter.lightsOff', lightId, duration);
 				this.lifx.light(lightId).off(duration);
@@ -101,5 +97,7 @@ function LifxAdapter(lifx) {
 		}
 	}
 }
+
+// util.inherits(LifxAdapter, EventEmitter);
 
 module.exports = LifxAdapter;
