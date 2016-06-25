@@ -55,7 +55,7 @@ function LightLibrary() {
 	}
 
 	self._setLightPower = function (lightId, powerState) {
-		var light = self._getLight(lightId);
+		var light = self.getOrCreate(lightId);
 		light.setPower(powerState);
 	}
 
