@@ -9,10 +9,10 @@ function BulbManager (fadeFactory, lifxAdapter) {
 		"groups": {
 			"Bedroom": [
 				"d073d501bd50",	    // bedside
-				"d073d5124f57",     // ceiling
-				"d073d502061f"    	// Meelah
+				"d073d502061f"      // Meelah
 			],
 			"Lounge": [
+				"d073d5124f57",     // ceiling
 				"d073d501f660",	    // booze
 				"d073d500ec68"		// couch
 			],
